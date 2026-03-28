@@ -13,6 +13,7 @@ const hiddenEmail = document.getElementById('hiddenEmail');
 const hiddenCompany = document.getElementById('hiddenCompany');
 const hiddenPhone = document.getElementById('hiddenPhone');
 const hiddenMessage = document.getElementById('hiddenMessage');
+const hiddenSubmittedAt = document.getElementById('hiddenSubmittedAt');
 
 const MAX_DRAWING_FILES = 2;
 let selectedDrawingFiles = [];
@@ -91,12 +92,18 @@ function syncStandardFields() {
   const companyInput = form.querySelector('input[name="Company Name"]');
   const phoneInput = form.querySelector('input[name="Phone"]');
   const messageInput = form.querySelector('textarea[name="Project Description"]');
+  const submittedAt = new Date();
+  const formattedSubmittedAt = new Intl.DateTimeFormat('en-IN', {
+    dateStyle: 'long',
+    timeStyle: 'long'
+  }).format(submittedAt);
 
   if (hiddenName) hiddenName.value = fullNameInput?.value || '';
   if (hiddenEmail) hiddenEmail.value = emailInput?.value || '';
   if (hiddenCompany) hiddenCompany.value = companyInput?.value || '';
   if (hiddenPhone) hiddenPhone.value = phoneInput?.value || '';
   if (hiddenMessage) hiddenMessage.value = messageInput?.value || '';
+  if (hiddenSubmittedAt) hiddenSubmittedAt.value = formattedSubmittedAt;
 }
 
 async function uploadFileToCloudinary(file) {
